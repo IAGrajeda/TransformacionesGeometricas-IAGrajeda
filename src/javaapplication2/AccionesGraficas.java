@@ -76,6 +76,47 @@ public class AccionesGraficas {
         }
     }
     
+    public static void drawLine(Graphics g, int x1, int y1, int x2, int y2) {
+        x1 = x1 + 250;
+        y1 = 250 - y1;
+        x2 = x2 + 250;
+        y2 = 250 - y2;
+
+        //diferenciaX y diferenciaY
+        int dx = Math.abs(x2 - x1);
+        int dy = Math.abs(y2 - y1);
+
+        //signo de la direccion Si x2 > x1, sx será igual a 1 y la línea se 
+        //dicuja hacia la derecha. Si x2 < x1, sx será igual a -1 y la línea se dibuja hacia la izquierda.
+        int sx = (x1 < x2) ? 1 : -1;
+        int sy = (y1 < y2) ? 1 : -1;
+        //variable de desicion, para saber a donde moverse 
+        int err = dx - dy;
+
+        int contador = 0;
+        while (true) {
+            if (contador % 2 == 0) {
+                g.drawLine(x1, y1, x1, y1);
+            }
+            contador++;
+
+            if (x1 == x2 && y1 == y2) {
+                break;
+            }
+
+            int e2 = 2 * err;
+            if (e2 > -dy) {
+                err -= dy;
+                x1 += sx;
+            }
+            if (e2 < dx) {
+                err += dx;
+                y1 += sy;
+            }
+        }
+    }
+
+    
     public static void DibujarLineaChingona(Graphics g, int x1, int y1, int x2, int y2, double angle) {
         int xCentro = 250;
         int yCentro = 250;
@@ -124,6 +165,24 @@ public class AccionesGraficas {
         int y3 = (int) (y1 + Math.sin(Math.toRadians(angle)) * 100);
         // Dibujamos la línea
         g.drawLine(x1, y1, x3, y3);
+    }
+    
+    public static void drawLine(Graphics g, int x1, int y1, int x2, int y2, double angle) {
+        int xCenter = 250;
+        int yCenter = 250;
+
+        // Aplicar la rotación a los puntos finales de la línea
+        double angleRad = Math.toRadians(angle);
+        double cosAngle = Math.cos(angleRad);
+        double sinAngle = Math.sin(angleRad);
+
+        int rotatedX1 = (int) ((x1 - xCenter) * cosAngle - (y1 - yCenter) * sinAngle + xCenter);
+        int rotatedY1 = (int) ((x1 - xCenter) * sinAngle + (y1 - yCenter) * cosAngle + yCenter);
+        int rotatedX2 = (int) ((x2 - xCenter) * cosAngle - (y2 - yCenter) * sinAngle + xCenter);
+        int rotatedY2 = (int) ((x2 - xCenter) * sinAngle + (y2 - yCenter) * cosAngle + yCenter);
+
+        // Dibujar la línea rotada
+        DibujarLiena(g, rotatedX1, rotatedY1, rotatedX2, rotatedY2);
     }
     
     

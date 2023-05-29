@@ -437,9 +437,45 @@ public class VentanaPrincipal extends JFrame {
                 // Verificar cuál figura está activa y proceder a dibujar
                 switch (figuraActual) {
                     case "linea":
-                        System.out.println("angulo¿linea= " + angulolinea +" rotacion=" + rotacion);
-                        AccionesGraficas.DibujarLineaConAngulo(g, x1Original, y1Original, x2Original, y2Original, rotationAngle);
-                        AccionesGraficas.DibujarLineaChingona(getLienzo().getGraphics(), x1Original, y1Original, x2Original, y2Original, rotationAngle);
+                        
+                        // Obtener el punto de rotación (punto final de la línea)
+                    double pivotX = x2Original;
+                    double pivotY = y2Original;
+
+                    // Calcular los valores de traslación
+                    double translateX = pivotX;
+                    double translateY = pivotY;
+
+                    // Calcular el ángulo de rotación en radianes
+                    double theta = Math.toRadians(rotacion);
+
+                    // Realizar la traslación para que el punto de rotación sea el origen
+                    x1Original -= translateX;
+                    y1Original -= translateY;
+                    x2Original -= translateX;
+                    y2Original -= translateY;
+
+                    // Realizar la rotación
+                    double cosTheta = Math.cos(theta);
+                    double sinTheta = Math.sin(theta);
+                    double x1Rotado = x1Original * cosTheta - y1Original * sinTheta;
+                    double y1Rotado = x1Original * sinTheta + y1Original * cosTheta;
+                    double x2Rotado = x2Original * cosTheta - y2Original * sinTheta;
+                    double y2Rotado = x2Original * sinTheta + y2Original * cosTheta;
+
+                    // Volver a trasladar el sistema de coordenadas a su posición original
+                    x1Original = (int) (x1Rotado + translateX);
+                    y1Original = (int) (y1Rotado + translateY);
+                    x2Original = (int) (x2Rotado + translateX);
+                    y2Original = (int) (y2Rotado + translateY);
+                    
+                    // Dibujar la línea rotada
+                    AccionesGraficas.DibujarLiena(getLienzo().getGraphics(), x1Original, y1Original, x2Original, y2Original);
+                    System.out.println(" x1="+x1+" y1="+ y1+ " x2=" + x2 + " y2=" + y2 + " angulo=" + rotationAngle);
+                        System.out.println("angulo¿linea= " + angulolinea +" rotacion=" + rotacion + " rotationAngle=" + rotationAngle);
+                        //AccionesGraficas.DibujarLineaConAngulo(g, x1Original, y1Original, x2Original, y2Original, rotationAngle);
+                        //AccionesGraficas.DibujarLineaChingona(getLienzo().getGraphics(), x1Original, y1Original, x2Original, y2Original, rotationAngle+rotacion);
+                        //AccionesGraficas.drawLine(getLienzo().getGraphics(), x1Original, y1Original, x2Original, y2Original, rotationAngle);
                         
                         break;
                     case "cuadrado": 
