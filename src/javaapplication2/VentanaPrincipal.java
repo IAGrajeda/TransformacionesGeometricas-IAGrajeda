@@ -88,7 +88,7 @@ public class VentanaPrincipal extends JFrame {
                 limpiarActivo = true;
                 actualizarEstadoBotones();
 
-                AccionesGraficas.DibujarLineaChingona(getLienzo().getGraphics(), x1Original, y1Original, x2Original, y2Original, rotationAngle);
+                AccionesGraficas.DibujarLiena(getLienzo().getGraphics(), x1Original, y1Original, x2Original, y2Original);
                 angulolinea = AccionesGraficas.AnguloLinea(x1Original, y1Original, x2Original, y2Original);
                 figuraActual = "linea";
             }
@@ -322,7 +322,7 @@ public class VentanaPrincipal extends JFrame {
 
                 //verificar cual esta activo para proceder a dibujar
                 if (figuraActual == "linea") {
-                    AccionesGraficas.DibujarLineaChingona(getLienzo().getGraphics(), x1Original, y1Original, x2Original, y2Original, rotationAngle);
+                    AccionesGraficas.DibujarLiena(getLienzo().getGraphics(), x1Original, y1Original, x2Original, y2Original);
                 }
                 if (figuraActual == "triangulo") {
                     AccionesGraficas.DibujarTriangulo(getLienzo().getGraphics(), x1Original, y1Original, x2Original, y2Original, x3Original, y3Original,rotationAngle);
@@ -389,7 +389,7 @@ public class VentanaPrincipal extends JFrame {
 
                 //verificar cual esta activo para proceder a dibujar
                 if (figuraActual == "linea") {
-                    AccionesGraficas.DibujarLineaChingona(getLienzo().getGraphics(), x1Original, y1Original, x2Original, y2Original, rotationAngle);
+                    AccionesGraficas.DibujarLiena(getLienzo().getGraphics(), x1Original, y1Original, x2Original, y2Original);
                 }
                 if (figuraActual == "triangulo") {
                     AccionesGraficas.DibujarTriangulo(getLienzo().getGraphics(), x1Original, y1Original, x2Original, y2Original, x3Original, y3Original,rotationAngle);
